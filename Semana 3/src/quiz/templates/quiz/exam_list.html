@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Exámenes{% endblock %}
+
+{% block content %}
+  <header>
+    <h1>Exámenes</h1>
+    <p><a href="{% url 'quiz:exam_create' %}">Crear examen</a></p>
+  </header>
+  {% if exams %}
+    <ul>
+      {% for exam in exams %}
+        <li>
+          <article>
+            <h2><a href="{% url 'quiz:exam_detail' exam.pk %}">{{ exam.title }}</a></h2>
+            {% if exam.description %}<p>{{ exam.description }}</p>{% endif %}
+          </article>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay exámenes disponibles.</p>
+  {% endif %}
+{% endblock %}
