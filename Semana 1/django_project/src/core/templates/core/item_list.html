@@ -3,15 +3,15 @@
 {% block title %}Listado de items{% endblock %}
 
 {% block content %}
-<h2>Items</h2>
-<ul>
+<h2 style="margin-bottom: 1rem;">Items ({{ items|length }})</h2>
+<ul style="list-style: none; display: grid; gap: 0.8rem;">
     {% for item in items %}
-    <li>
-        <strong>{{ item.name }}</strong>
-        {% if item.description %} - {{ item.description }}{% endif %}
+    <li style="background: #fff; border: 1px solid #d9e2ec; border-radius: 8px; padding: 1rem 1.2rem;">
+        <strong style="color: #1f3a5f;">{{ item.name }}</strong>
+        {% if item.description %}<p style="color: #486581;">{{ item.description }}</p>{% endif %}
     </li>
     {% empty %}
-    <li>No hay items</li>
+    <li style="background: #fff; border: 1px dashed #d9e2ec; border-radius: 8px; padding: 1rem;">No hay items</li>
     {% endfor %}
 </ul>
 {% endblock %}
