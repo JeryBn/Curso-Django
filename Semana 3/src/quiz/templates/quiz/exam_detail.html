@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}{{ exam.title }}{% endblock %}
+
+{% block content %}
+  <article>
+    <header>
+      <h1>{{ exam.title }}</h1>
+      {% if exam.description %}<p>{{ exam.description }}</p>{% endif %}
+      <p><a href="{% url 'quiz:question_create' exam.pk %}">Añadir pregunta</a></p>
+    </header>
+    <section aria-labelledby="questions-heading">
+      <h2 id="questions-heading">Preguntas</h2>
+      {% if exam.questions.all %}
+        <ol>
+          {% for question in exam.questions.all %}
+            <li>
+              <article>
+                <h3>{{ question.prompt }}</h3>
+                <ul>
+                  {% for choice in question.choices.all %}
+                    <li{% if choice.is_correct %} aria-label="Respuesta correcta"{% endif %}>
+                      {{ choice.text }}{% if choice.is_correct %} (correcta){% endif %}
+                    </li>
+                  {% empty %}
+                    <li>Esta pregunta no tiene opciones.</li>
+                  {% endfor %}
+                </ul>
+              </article>
+            </li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <p>Este examen todavía no tiene preguntas.</p>
+      {% endif %}
+    </section>
+  </article>
+{% endblock %}
