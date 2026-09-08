@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva pregunta - {{ exam.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz:exam_list' %}">Exámenes</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'quiz:exam_detail' exam.pk %}">{{ exam.titulo }}</a></li>
+            <li class="breadcrumb-item active">Nueva pregunta</li>
+        </ol>
+    </nav>
+
+    <h1>Nueva pregunta para: {{ exam.titulo }}</h1>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors or formset.non_field_errors %}
+        <div class="alert alert-danger">
+            {% if form.non_field_errors %}
+                {{ form.non_field_errors }}
+            {% endif %}
+            {% if formset.non_field_errors %}
+                {{ formset.non_field_errors }}
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="card mb-4">
+            <div class="card-header"><strong>Formulario de Pregunta</strong></div>
+            <div class="card-body">
+                {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div class="text-danger small">{{ field.errors }}</div>
+                    {% endif %}
+                    {% if field.help_text %}
+                    <div class="form-text">{{ field.help_text }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header"><strong>Opciones de Respuesta</strong></div>
+            <div class="card-body">
+                <p class="text-muted small">Marca exactamente <strong>una</strong> opción como correcta.</p>
+
+                {{ formset.management_form }}
+
+                {% for form_sub in formset %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                {% for field in form_sub %}
+                                {% if field.name != 'correcta' %}
+                                <div class="mb-2">
+                                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors }}</div>
+                                    {% endif %}
+                                    {% if field.help_text %}
+                                    <div class="form-text">{{ field.help_text }}</div>
+                                    {% endif %}
+                                </div>
+                                {% else %}
+                                <div class="form-check">
+                                    {{ field }}
+                                    <label for="{{ field.id_for_label }}" class="form-check-label">{{ field.label }}</label>
+                                    {% if field.errors %}
+                                    <div class="text-danger small">{{ field.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4 text-end">
+                                {% if formset.can_delete %}
+                                <div class="form-check mt-4">
+                                    {{ form_sub.DELETE }}
+                                    <label for="{{ form_sub.DELETE.id_for_label }}" class="form-check-label">Eliminar</label>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar pregunta</button>
+        <a href="{% url 'quiz:exam_detail' exam.pk %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
