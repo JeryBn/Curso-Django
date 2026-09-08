@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Listado de items{% endblock %}
+
+{% block content %}
+<h2>Items</h2>
+<ul>
+    {% for item in items %}
+    <li>
+        <strong>{{ item.name }}</strong>
+        {% if item.description %} - {{ item.description }}{% endif %}
+    </li>
+    {% empty %}
+    <li>No hay items</li>
+    {% endfor %}
+</ul>
+{% endblock %}
