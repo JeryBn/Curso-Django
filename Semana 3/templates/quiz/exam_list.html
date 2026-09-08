@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Exámenes{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Exámenes</h1>
+        <a href="{% url 'quiz:exam_create' %}" class="btn btn-primary">+ Nuevo examen</a>
+    </div>
+
+    {% if exam_list %}
+    <div class="list-group">
+        {% for exam in exam_list %}
+        <a href="{% url 'quiz:exam_detail' exam.pk %}" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ exam.titulo }}</h5>
+                <small>{{ exam.fecha_creacion }}</small>
+            </div>
+            {% if exam.descripcion %}
+            <p class="mb-1">{{ exam.descripcion }}</p>
+            {% endif %}
+            <small>{{ exam.preguntas.count }} pregunta(s)</small>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">No hay exámenes creados. <a href="{% url 'quiz:exam_create' %}">Crear uno</a>.</div>
+    {% endif %}
+</div>
+{% endblock %}
