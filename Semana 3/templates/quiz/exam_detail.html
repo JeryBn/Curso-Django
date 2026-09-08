@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ exam.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'quiz:exam_list' %}">Exámenes</a></li>
+            <li class="breadcrumb-item active">{{ exam.titulo }}</li>
+        </ol>
+    </nav>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>{{ exam.titulo }}</h1>
+        <a href="{% url 'quiz:question_create' exam_id=exam.pk %}" class="btn btn-success">+ Nueva pregunta</a>
+    </div>
+
+    {% if exam.descripcion %}
+    <p class="text-muted mb-4">{{ exam.descripcion }}</p>
+    {% endif %}
+
+    {% if preguntas %}
+        {% for pregunta in preguntas %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <strong>Pregunta {{ forloop.counter }}:</strong> {{ pregunta.enunciado }}
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for opcion in pregunta.opciones.all %}
+                <li class="list-group-item {% if opcion.correcta %}list-group-item-success{% endif %}">
+                    {% if opcion.correcta %}<strong>&#10004; </strong>{% endif %}
+                    {{ opcion.texto }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info">No hay preguntas para este examen. <a href="{% url 'quiz:question_create' exam_id=exam.pk %}">Crear una</a>.</div>
+    {% endif %}
+</div>
+{% endblock %}
