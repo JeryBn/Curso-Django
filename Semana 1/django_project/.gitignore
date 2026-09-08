@@ -1,19 +1,12 @@
-# Local Python environment
 venv/
 .venv/
 __pycache__/
 *.py[cod]
-
-# Local database and credentials
 db.sqlite3
 db.sqlite3-journal
 .env
-.django-secret-key
-
-# Local editor and test output
 .vscode/
 .idea/
 .pytest_cache/
 .coverage
-htmlcov/
 *.log
