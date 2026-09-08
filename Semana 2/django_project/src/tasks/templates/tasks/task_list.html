@@ -6,14 +6,14 @@
 <h2>Tareas ({{ total }})</h2>
 
 {% if messages %}
-<ul>
+<ul class="messages">
     {% for message in messages %}
     <li>{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
 
-<table border="1">
+<table>
     <thead>
         <tr>
             <th>Title</th>
@@ -26,10 +26,10 @@
     <tbody>
         {% for task in tasks %}
         <tr>
-            <td>{{ task.title }}</td>
+            <td><strong>{{ task.title }}</strong></td>
             <td>{{ task.description }}</td>
             <td>{{ task.status }}</td>
-            <td>{{ task.priority }}</td>
+            <td><span class="badge badge-{{ task.priority }}">{{ task.priority }}</span></td>
             <td>{{ task.created_at }}</td>
         </tr>
         {% empty %}
@@ -40,6 +40,5 @@
     </tbody>
 </table>
 
-<p><a href="{% url 'tasks:task_create' %}">Crear nueva tarea</a></p>
-<p><a href="{% url 'core:item_list' %}">Volver a items</a></p>
+<p style="margin-top: 1rem;"><a class="btn" href="{% url 'tasks:task_create' %}">Crear nueva tarea</a></p>
 {% endblock %}
