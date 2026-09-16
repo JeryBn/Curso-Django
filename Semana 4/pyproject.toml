@@ -1,0 +1,7 @@
+[tool.ruff]
+target-version = "py312"
+line-length = 79
+extend-exclude = ["library/migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]

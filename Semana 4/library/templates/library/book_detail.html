@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }} · Biblioteca{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs" aria-label="Ruta de navegación">
+    <a href="{% url 'library:book_list' %}">← Volver al catálogo</a>
+    <span aria-hidden="true">/</span>
+    <span>Detalle del libro</span>
+</nav>
+
+<article class="book-detail">
+    <aside class="detail-sidebar" aria-label="Portada e identificación">
+        {% if book.cover %}
+            <div class="detail-cover uploaded-cover"><img src="{{ book.cover.url }}" alt="Portada de {{ book.title }}"></div>
+        {% else %}
+            <div class="book-cover detail-cover cover-theme-sage" aria-label="Portada tipográfica de {{ book.title }}">
+                <span class="cover-edition">BIBLIOTECA / LITERATURA</span>
+                <span class="cover-title">{{ book.title }}</span>
+                <span class="cover-ornament" aria-hidden="true">✳</span>
+                <span class="cover-author">{{ book.author }}</span>
+            </div>
+        {% endif %}
+        <div class="isbn-label"><span>ISBN · 13 DÍGITOS</span><strong>{{ book.isbn }}</strong></div>
+        {% if request.user.is_staff %}
+            <a class="button button-secondary edit-book" href="{% url 'admin:library_book_change' book.pk %}">Editar en el administrador ↗</a>
+        {% endif %}
+    </aside>
+
+    <div class="detail-content">
+        <p class="eyebrow">UN LIBRO, MUCHAS CONEXIONES</p>
+        <h1>{{ book.title }}</h1>
+        <p class="detail-author">Por <a href="#author">{{ book.author }}</a></p>
+        <div class="tags detail-tags" aria-label="Categorías del libro">
+            {% for category in book.categories.all %}
+                <a class="tag" href="{% url 'library:book_list' %}?category={{ category.pk }}#collection">{{ category.name }}</a>
+            {% empty %}
+                <span class="tag tag-muted">Sin categorías asignadas</span>
+            {% endfor %}
+        </div>
+
+        <section class="detail-section" aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Acerca de este libro</h2>
+            <div class="prose">{{ book.summary|default:"Este libro aún no tiene una sinopsis registrada."|linebreaks }}</div>
+        </section>
+
+        <section id="author" class="detail-section" aria-labelledby="author-heading">
+            <div class="section-heading compact-heading"><h2 id="author-heading">Detrás de las páginas</h2><span class="relation-label">Autor + perfil</span></div>
+            <div class="author-panel">
+                {% with profile=book.author.profile %}
+                    {% if profile.photo %}
+                        <img class="author-avatar" src="{{ profile.photo.url }}" alt="Fotografía de {{ book.author }}" loading="lazy">
+                    {% else %}
+                        <span class="author-avatar avatar-placeholder" aria-hidden="true">{{ book.author.first_name|first }}{{ book.author.last_name|first }}</span>
+                    {% endif %}
+                    <div class="author-info">
+                        <h3>{{ book.author }}</h3>
+                        {% if profile %}
+                            <p class="author-meta">{% if profile.country %}{{ profile.country }}{% endif %}{% if profile.country and profile.birth_date %} · {% endif %}{% if profile.birth_date %}{{ profile.birth_date|date:"j \d\e F \d\e Y" }}{% endif %}</p>
+                            <div class="prose">{{ profile.biography|default:"Biografía pendiente de registrar."|linebreaks }}</div>
+                            {% if profile.website %}<a class="text-link" href="{{ profile.website }}" rel="noopener noreferrer">Sitio web del autor ↗</a>{% endif %}
+                        {% else %}
+                            <p class="muted">Este autor aún no tiene un perfil biográfico.</p>
+                        {% endif %}
+                    </div>
+                {% endwith %}
+            </div>
+        </section>
+
+        <section class="detail-section" aria-labelledby="publications-heading">
+            <div class="section-heading compact-heading"><h2 id="publications-heading">Editoriales y ediciones</h2><span class="relation-label">Publication</span></div>
+            <p class="section-description">Cada publicación conecta este libro con una editorial y conserva su fecha y edición.</p>
+            <div class="publication-list">
+                {% for publication in book.publications.all %}
+                    <div class="publication-card">
+                        <div><h3>{{ publication.publisher.name }}</h3><p>{{ publication.publisher.country|default:"País no registrado" }}</p></div>
+                        <dl>
+                            <div><dt>Publicación</dt><dd>{{ publication.publication_date|date:"d/m/Y" }}</dd></div>
+                            <div><dt>Edición</dt><dd><span class="edition-badge">{{ publication.edition }}.ª</span></dd></div>
+                        </dl>
+                    </div>
+                {% empty %}
+                    <p class="inline-empty">Todavía no se han registrado publicaciones para este libro.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+</article>
+{% endblock %}
