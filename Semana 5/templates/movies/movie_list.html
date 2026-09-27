@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Películas disponibles | CineLab{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Laboratorio de Django Admin</p>
+    <h1>Películas disponibles</h1>
+    <p>Selecciona una película para consultar recomendaciones del mismo género, ordenadas por su valoración promedio.</p>
+</section>
+
+<section class="movie-grid" aria-label="Catálogo de películas">
+    {% for movie in movies %}
+        <article class="movie-card">
+            <div class="poster-placeholder" aria-hidden="true">{{ movie.title|slice:":1" }}</div>
+            <div class="movie-card__body">
+                <p class="movie-card__year">{{ movie.release_year }}</p>
+                <h2>{{ movie.title }}</h2>
+                <p class="movie-card__meta">Dirección: {{ movie.director }}</p>
+                <p class="movie-card__genres">
+                    {% for genre in movie.genres.all %}<span>{{ genre.name }}</span>{% endfor %}
+                </p>
+                <p>{{ movie.synopsis|truncatewords:22 }}</p>
+                <div class="movie-card__footer">
+                    <strong>{% if movie.average_rating %}{{ movie.average_rating|floatformat:1 }}/5{% else %}Sin valorar{% endif %}</strong>
+                    <a class="button" href="{% url 'movies:movie_recommendations' movie.pk %}">Ver recomendaciones</a>
+                </div>
+            </div>
+        </article>
+    {% empty %}
+        <p class="empty-state">Todavía no hay películas. Añádelas desde el panel de administración.</p>
+    {% endfor %}
+</section>
+{% endblock %}
