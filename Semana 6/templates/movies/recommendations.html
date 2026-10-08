@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Recomendaciones para {{ selected_movie.title }} | CineLab{% endblock %}
+
+{% block content %}
+<a class="back-link" href="{% url 'movies:movie_list' %}">← Volver al catálogo</a>
+<section class="hero hero--compact">
+    <p class="eyebrow">Película seleccionada</p>
+    <h1>{{ selected_movie.title }}</h1>
+    <p>{{ selected_movie.synopsis }}</p>
+    <p class="movie-card__genres">
+        {% for genre in selected_movie.genres.all %}<span>{{ genre.name }}</span>{% endfor %}
+    </p>
+</section>
+
+<section>
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Resultado del algoritmo</p>
+            <h2>Del mismo género y mejor valoradas</h2>
+        </div>
+        <p>{{ recommendations|length }} recomendaciones encontradas</p>
+    </div>
+    <div class="recommendation-list">
+        {% for movie in recommendations %}
+            <article class="recommendation-row">
+                <div>
+                    <p class="movie-card__year">{{ movie.release_year }} · {{ movie.duration_minutes }} min</p>
+                    <h3>{{ movie.title }}</h3>
+                    <p>{{ movie.synopsis|truncatewords:25 }}</p>
+                </div>
+                <div class="score">
+                    <strong>{{ movie.average_rating|floatformat:1 }}/5</strong>
+                    <span>
+                        {{ movie.rating_count }}
+                        {% if movie.rating_count == 1 %}valoración{% else %}valoraciones{% endif %}
+                    </span>
+                </div>
+            </article>
+        {% empty %}
+            <p class="empty-state">No existen otras películas valoradas que compartan género con esta selección.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

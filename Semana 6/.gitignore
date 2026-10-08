@@ -1,0 +1,25 @@
+# Entorno local y archivos generados por Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Datos y archivos locales
+db.sqlite3
+media/
+staticfiles/
+.env
+
+# Herramientas y sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Salidas temporales de verificación
+_guide_render/
+_qa_documento/
+*.pdf
+Entrega-*.zip
+
+_qa/
+server-*.log

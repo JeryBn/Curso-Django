@@ -1,0 +1,8 @@
+{% extends 'news/base.html' %}
+{% block title %}{{ article.title }} en Actualidad Digital{% endblock %}
+{% block content %}<a class="back" href="{% url 'news:home' %}">← Volver a la portada</a>
+<article class="detail"><h1>{{ article.title }}</h1><p class="meta">{{ article.author.name }} · {{ article.published_at|date:"d M Y H:i" }}</p>
+<div class="tags">{% for category in article.categories.all %}<a href="{% url 'news:category' category.slug %}">{{ category.name }}</a>{% endfor %}</div>
+{% if article.featured_image %}<img class="hero-image" src="{{ article.featured_image.url }}" alt="Imagen de {{ article.title }}">{% endif %}
+<p class="lead">{{ article.summary }}</p><div class="body-text">{{ article.body|linebreaks }}</div>
+<section class="author"><h2>Sobre el autor</h2><p>{{ article.author.name }}</p><p>{{ article.author.biography|default:"Autor del portal" }}</p></section></article>{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'news/base.html' %}
+{% block title %}Portada de Actualidad Digital{% endblock %}
+{% block content %}
+  <p class="eyebrow">EL PORTAL DE LA SEMANA</p>
+  <h1>Últimas noticias</h1>
+  <p class="intro">Información publicada desde el administrador de Django.</p>
+  <div class="article-grid">
+    {% for article in articles %}
+      {% include 'news/_article_card.html' with article=article only %}
+    {% empty %}
+      <section class="empty">
+        <h2>Aún no hay noticias publicadas</h2>
+        <p>Vuelve pronto para consultar las novedades.</p>
+      </section>
+    {% endfor %}
+  </div>
+{% endblock %}

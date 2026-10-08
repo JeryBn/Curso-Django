@@ -1,0 +1,66 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+Found 25 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, auth, contenttypes, movies, news, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying movies.0001_initial... OK
+  Applying news.0001_initial... OK
+test_admin_configuration_for_three_models (news.tests.PortalTests.test_admin_configuration_for_three_models) ... ok
+test_admin_edit_is_visible_without_code_changes (news.tests.PortalTests.test_admin_edit_is_visible_without_code_changes) ... ok
+test_category_reuses_card_and_filters (news.tests.PortalTests.test_category_reuses_card_and_filters) ... ok
+test_detail_displays_author_category_and_date (news.tests.PortalTests.test_detail_displays_author_category_and_date) ... ok
+test_drafts_and_future_articles_are_hidden (news.tests.PortalTests.test_drafts_and_future_articles_are_hidden) ... ok
+test_empty_category (news.tests.PortalTests.test_empty_category) ... ok
+test_empty_home (news.tests.PortalTests.test_empty_home) ... ok
+test_home_inherits_base_and_card (news.tests.PortalTests.test_home_inherits_base_and_card) ... ok
+test_html_is_escaped (news.tests.PortalTests.test_html_is_escaped) ... ok
+test_unknown_routes_return_404 (news.tests.PortalTests.test_unknown_routes_return_404) ... ok
+test_all_models_use_custom_model_admin_classes (movies.tests.AdminConfigurationTests.test_all_models_use_custom_model_admin_classes) ... ok
+test_audit_fields_are_read_only_in_every_admin (movies.tests.AdminConfigurationTests.test_audit_fields_are_read_only_in_every_admin) ... ok
+test_movie_admin_has_filters_search_columns_and_inline (movies.tests.AdminConfigurationTests.test_movie_admin_has_filters_search_columns_and_inline) ... ok
+test_movie_change_form_contains_rating_inline_and_read_only_audit (movies.tests.AdminConfigurationTests.test_movie_change_form_contains_rating_inline_and_read_only_audit) ... ok
+test_movie_search_returns_the_matching_title (movies.tests.AdminConfigurationTests.test_movie_search_returns_the_matching_title) ... ok
+test_movie_year_filter_limits_the_changelist (movies.tests.AdminConfigurationTests.test_movie_year_filter_limits_the_changelist) ... ok
+test_movie_title_and_year_are_unique_together (movies.tests.ModelTests.test_movie_title_and_year_are_unique_together) ... ok
+test_rating_is_unique_per_reviewer_and_movie (movies.tests.ModelTests.test_rating_is_unique_per_reviewer_and_movie) ... ok
+test_string_representations_are_descriptive (movies.tests.ModelTests.test_string_representations_are_descriptive) ... ok
+test_editor_admin_index_hides_user_and_group_management (movies.tests.PermissionTests.test_editor_admin_index_hides_user_and_group_management) ... ok
+test_editor_cannot_open_movie_delete_page (movies.tests.PermissionTests.test_editor_cannot_open_movie_delete_page) ... ok
+test_editor_has_add_and_change_but_not_delete_movie_permission (movies.tests.PermissionTests.test_editor_has_add_and_change_but_not_delete_movie_permission) ... ok
+test_catalog_lists_all_movies_with_rating_annotations (movies.tests.RecommendationViewTests.test_catalog_lists_all_movies_with_rating_annotations) ... ok
+test_recommendations_use_same_genre_and_highest_average_first (movies.tests.RecommendationViewTests.test_recommendations_use_same_genre_and_highest_average_first) ... ok
+test_unrated_movies_are_not_recommended (movies.tests.RecommendationViewTests.test_unrated_movies_are_not_recommended) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 7.492s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+  Applying sessions.0001_initial... OK
+System check identified no issues (0 silenced).
+Usuarios admin_lab y editor_lab configurados; grupo editores actualizado.
+Usuarios admin_lab y editor_lab configurados; grupo editores actualizado.
+Usuarios admin_lab y editor_lab configurados; grupo editores actualizado.

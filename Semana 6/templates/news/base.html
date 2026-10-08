@@ -1,0 +1,13 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Actualidad Digital{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'news/portal.css' %}"></head>
+<body>
+<header class="site-header"><div class="shell"><a class="brand" href="{% url 'news:home' %}">Actualidad Digital</a><p>Noticias sobre tecnología, ciencia y comunidad</p>
+<nav aria-label="Navegación principal"><a href="{% url 'news:home' %}">Portada</a>{% for category in categories %}<a href="{% url 'news:category' category.slug %}">{{ category.name }}</a>{% endfor %}<a href="{% url 'admin:index' %}">Administración</a></nav></div></header>
+<div class="shell layout"><main>{% block content %}{% endblock %}</main>
+<aside>{% block sidebar %}{% include 'news/_sidebar.html' %}{% endblock %}</aside></div>
+<footer class="shell">Portal académico de Jery Becerra Ninaquispe · Laboratorio 6</footer>
+</body></html>

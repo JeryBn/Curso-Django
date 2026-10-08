@@ -1,0 +1,6 @@
+<article class="card">
+{% if article.featured_image %}<img src="{{ article.featured_image.url }}" alt="Imagen de {{ article.title }}">{% else %}<div class="image-placeholder">Actualidad Digital</div>{% endif %}
+<div class="card-content"><p class="meta"><time datetime="{{ article.published_at|date:'c' }}">{{ article.published_at|date:"d M Y" }}</time> · {{ article.author.name }}</p>
+<h2><a href="{% url 'news:detail' article.slug %}">{{ article.title }}</a></h2><p>{{ article.summary|truncatewords:22 }}</p>
+<div class="tags">{% for category in article.categories.all %}<a href="{% url 'news:category' category.slug %}">{{ category.name }}</a>{% endfor %}</div>
+<a class="read-more" href="{% url 'news:detail' article.slug %}">Leer noticia →</a></div></article>

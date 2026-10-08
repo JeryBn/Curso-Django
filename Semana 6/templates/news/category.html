@@ -1,0 +1,4 @@
+{% extends 'news/base.html' %}
+{% block title %}{{ selected_category.name }} en Actualidad Digital{% endblock %}
+{% block content %}<p class="eyebrow">NOTICIAS POR CATEGORÍA</p><h1>{{ selected_category.name }}</h1><p class="intro">{{ selected_category.description }}</p>
+<div class="article-grid">{% for article in articles %}{% include 'news/_article_card.html' with article=article only %}{% empty %}<section class="empty"><h2>Sin noticias en esta categoría</h2><p>Todavía no se ha publicado contenido en esta sección.</p></section>{% endfor %}</div>{% endblock %}

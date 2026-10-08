@@ -1,0 +1,1 @@
+<section class="sidebar"><h2>Explorar categorías</h2>{% for category in categories %}<a href="{% url 'news:category' category.slug %}">{{ category.name }}</a><p>{{ category.description|default:"Noticias de esta sección" }}</p>{% empty %}<p>No hay categorías disponibles.</p>{% endfor %}</section>
