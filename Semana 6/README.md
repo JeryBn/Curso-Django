@@ -35,7 +35,7 @@ Los enlaces utilizan url con nombres news:home, news:detail y news:category. La 
 
 En el administrador se pueden crear y modificar categorías, autores y noticias. Una noticia se muestra cuando está marcada como publicada y su fecha no está en el futuro. Se comprobó un cambio de título y cuerpo desde el panel y su aparición inmediata en el detalle público.
 
-El texto <strong>Texto importante</strong> y <script>alert("prueba")</script> se muestra literalmente: Django escapa los caracteres HTML antes de convertir los saltos de línea. No se ejecuta JavaScript.
+El texto `<strong>Texto importante</strong>` y `<script>alert("prueba")</script>` se muestra literalmente: Django escapa los caracteres HTML antes de convertir los saltos de línea. No se ejecuta JavaScript.
 
 STATICFILES_DIRS contiene static y MEDIA_ROOT contiene media. config/urls.py sirve medios solo durante desarrollo. DEBUG=True y el servidor de desarrollo son para ejecución local; publicar código en GitHub no despliega el sitio en Internet.
 
@@ -54,3 +54,4 @@ STATICFILES_DIRS contiene static y MEDIA_ROOT contiene media. config/urls.py sir
 Repositorio: https://github.com/JeryBn/Curso-Django/tree/main/Semana%206
 
 La estructura del repositorio ya utiliza Semana 6 y se conserva ese nombre. La guía integra desarrollo, código, casos de prueba, observaciones, conclusiones e imágenes del funcionamiento. PROMPTS.md registra la asistencia utilizada. La entrega al campus virtual corresponde al alumno.
+
