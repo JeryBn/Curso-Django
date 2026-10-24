@@ -1,0 +1,8 @@
+Verificación del 24 de octubre de 2026
+Comando: python manage.py test
+Ran 73 tests in 6.568s
+OK
+System check identified no issues (0 silenced).
+
+Servidor local: http://127.0.0.1:8089
+32 comprobaciones HTTP, 6 casos de consola y 6 controles de pasarela satisfactorios.
