@@ -1,0 +1,14 @@
+import React from 'react';
+
+export function Header({ count }) {
+  return <header><strong>Cine Horizonte</strong><nav><span aria-live="polite">Favoritas: {count}</span> · <a href="#cartelera">Cartelera</a> · <a href="#contacto">Contacto</a></nav></header>;
+}
+
+export function Hero({ movie, children }) {
+  return <section className="hero"><span>PELÍCULA DESTACADA</span><h1>{movie.title}</h1><p>{movie.synopsis}</p><a href="#cartelera">Ver horarios</a>{children}</section>;
+}
+
+export function Footer() {
+  return <footer id="contacto">Cine Horizonte · Lima · contacto@cinehorizonte.example</footer>;
+}
+
