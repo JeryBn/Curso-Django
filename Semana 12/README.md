@@ -42,3 +42,8 @@ Para reproducir el bloqueo CORS, inicia Django temporalmente con `$env:DJANGO_CO
 
 Pruebas del servidor: `manage.py test` con el Python del entorno virtual. Compilación del cliente: `npm run build`.
 
+
+## Entregable y evidencias
+
+- [Guía de laboratorio resuelta](GLAB-S12-MMONTGOMERY-2026-02-resuelto.docx)
+- [Capturas originales y resultados de pruebas](evidencias/)

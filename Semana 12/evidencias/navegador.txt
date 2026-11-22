@@ -1,0 +1,11 @@
+Navegador Chromium (Microsoft Edge), versión 158.0.4370.33
+GET /api/ → 200. Raíz navegable: exams, questions, choices.
+GET /api/exams/?page=1 → 200. CORS: Access-Control-Allow-Origin: http://localhost:5173
+Carga: GET real con 1250 ms de demora inducida por la herramienta de prueba; respuesta de Django sin modificar.
+POST /api/exams/ con title vacío → 400. {"title":["Este campo no puede estar en blanco."]}
+POST /api/exams/ → 201. ID 3. Navegación automática al listado.
+DELETE /api/exams/3/ → 204 seguido de GET → 200; la fila desaparece.
+Con DJANGO_CORS_ORIGINS vacío, la consola de Edge registró:
+Access to XMLHttpRequest at 'http://127.0.0.1:8000/api/exams/?page=1' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Proceso Django detenido con React abierto. Edge: net::ERR_CONNECTION_REFUSED. Se mostró Reintentar.
+CORS restaurado y Django reiniciado. Reintentar → 200; se vuelve a mostrar la tabla.
