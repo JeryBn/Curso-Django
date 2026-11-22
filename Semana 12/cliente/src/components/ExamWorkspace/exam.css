@@ -1,0 +1,42 @@
+.exam-workspace {
+  width: min(960px, calc(100% - 2rem));
+  margin: 2rem auto 4rem;
+  padding: clamp(1rem, 4vw, 2.5rem);
+  color: #182635;
+  background: #f9fafc;
+  border-radius: 16px;
+}
+.exam-workspace h1 { font-size: clamp(2rem, 5vw, 3rem); margin: .4rem 0; }
+.exam-access { padding: 1rem; background: #e8eef6; border-radius: 8px; margin-bottom: 2rem; }
+.exam-access summary { cursor: pointer; font-weight: 600; }
+.exam-access form, .exam-toolbar, .exam-pagination { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+.exam-access form { margin-top: 1rem; }
+.exam-toolbar { justify-content: space-between; }
+.exam-workspace input { padding: .65rem; border: 1px solid #718096; border-radius: 6px; color: #182635; background: white; }
+.exam-workspace button, .exam-primary {
+  display: inline-block;
+  cursor: pointer;
+  padding: .65rem .9rem;
+  border: 1px solid #9aa9bc;
+  border-radius: 6px;
+  background: white;
+  color: #182635;
+  font: inherit;
+}
+.exam-workspace button:disabled { opacity: .55; cursor: default; }
+.exam-workspace a { color: #22448d; }
+.exam-workspace .exam-primary { color: white; background: #21448f; text-decoration: none; border-color: #21448f; }
+.exam-workspace .exam-delete { color: #992433; }
+.exam-table-wrap { overflow-x: auto; }
+.exam-workspace table { width: 100%; border-collapse: collapse; background: white; }
+.exam-workspace th, .exam-workspace td { text-align: left; padding: .75rem; border-bottom: 1px solid #dce3ec; }
+.exam-workspace th { background: #e8eef6; }
+.exam-pagination { margin-top: 1rem; }
+.exam-error { padding: .75rem; background: #fce9ec; color: #8a1e2d; border-radius: 6px; }
+.exam-skeleton div { height: 2.5rem; background: #e2e9f2; border-radius: 6px; margin-bottom: .5rem; }
+.exam-skeleton div:nth-child(3) { width: 85%; }
+.exam-skeleton div:nth-child(4) { width: 70%; }
+.exam-form { display: grid; gap: .75rem; max-width: 32rem; }
+.exam-form button { justify-self: start; }
+.exam-nav { display: flex; align-items: center; justify-content: center; gap: 1.25rem; padding: 1rem; }
+.exam-nav a { color: #e0eaff; }
